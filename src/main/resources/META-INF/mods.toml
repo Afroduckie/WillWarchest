@@ -1,0 +1,43 @@
+modLoader="javafml"
+
+loaderVersion="[32,)"
+
+#issueTrackerURL="null" #optional
+
+[[mods]]
+
+modId="agwarchest"
+
+version="1.0"
+
+displayName="William's Warchest"
+
+#updateJSONURL="null"
+
+#displayURL="" #optional
+
+#logoFile="" #optional
+
+#credits="Thanks goes to me because I made it"
+
+authors="AndrielGaming William"
+
+description='''
+Adds several new additions to vanilla gameplay from new mobs, ore, and blocks as well as some more secret ones for the avid explorer!
+'''
+
+
+#Dependencies
+[[dependencies.agwarchest]]
+    modId="forge" 
+    mandatory=true
+    versionRange="[32,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.agwarchest]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.1]"
+    ordering="NONE"
+    side="BOTH"

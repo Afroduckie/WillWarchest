@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "agwarchest:items/molten_creeper_spawn_egg"
+	}
+}

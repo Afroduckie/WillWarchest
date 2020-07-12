@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ixi",
+		"xox",
+		"ixi"
+	],
+	"key": 
+	{
+		"i": 
+		{
+			"item": "minecraft:clay_ball"
+		},
+		"x": 
+		{
+			"item": "minecraft:tnt"
+		},
+		"o": 
+		{
+			"item": "minecraft:redstone_torch"
+		}
+	},
+	"result": 
+	{
+		"item": "agwarchest:c4_block",
+		"count": 2
+	}
+}

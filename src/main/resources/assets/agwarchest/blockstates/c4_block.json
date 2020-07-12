@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "":
+        { 
+        "model": "agwarchest:block/c4_block" 
+        }
+    }
+}
