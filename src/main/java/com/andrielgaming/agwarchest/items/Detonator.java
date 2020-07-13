@@ -64,11 +64,11 @@ public class Detonator extends Item
 		tooltip.add(new StringTextComponent("§1-----------------------------------------------------"));
 		tooltip.add(new StringTextComponent("§cRight-Click any C4 to arm it"));
 		tooltip.add(new StringTextComponent("§9Right-Click any C4 again to disarm it"));
-		tooltip.add(new StringTextComponent("§6Right-Click anwhere to detonated armed explosives"));
-		tooltip.add(new StringTextComponent("§6Right-Click while sneaking to adjust the timer"));
+		tooltip.add(new StringTextComponent("§6Right-Click anwhere to detonate armed explosives"));
+		tooltip.add(new StringTextComponent("§7Right-Click while sneaking to adjust the timer"));
 		tooltip.add(new StringTextComponent("§1-----------------------------------------------------"));
-		tooltip.add(new StringTextComponent("§o§eWarning: Primed C4 is extremely volatile and may"));
-		tooltip.add(new StringTextComponent("§o§edetonate prematurely if bumped!"));
+		tooltip.add(new StringTextComponent("§o§eWarning: C4 is extremely dangerous and has a very"));
+		tooltip.add(new StringTextComponent("§o§e  large blast radius. Take shelter VERY far away!"));
 	}
 	
 	@Override
