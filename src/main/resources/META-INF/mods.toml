@@ -2,13 +2,13 @@ modLoader="javafml"
 
 loaderVersion="[32,)"
 
-#issueTrackerURL="null" #optional
+#issueTrackerURL="https://github.com/Afroduckie/WillWarchest/issues" #optional
 
 [[mods]]
 
 modId="agwarchest"
 
-version="1.0"
+version="0.1.0"
 
 displayName="William's Warchest"
 
@@ -18,12 +18,15 @@ displayName="William's Warchest"
 
 #logoFile="" #optional
 
-#credits="Thanks goes to me because I made it"
+#credits="Update Later"
 
 authors="AndrielGaming William"
 
 description='''
-Adds several new additions to vanilla gameplay from new mobs, ore, and blocks as well as some more secret ones for the avid explorer!
+"One of everything, please!"
+
+William's Warchest is a collection of additions to vanilla gameplay. New items, blocks, enchantments, ores, mobs, biomes, structures, and even a new boss are added with an aim to make survival mode
+a more engaging and dynamic experience full of surprises, twists, and turns! Please refer to the issues page, wiki, or suggestion menu if you have any associated feedback to give!
 '''
 
 

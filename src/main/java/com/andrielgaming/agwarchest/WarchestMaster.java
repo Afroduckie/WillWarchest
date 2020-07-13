@@ -1,16 +1,19 @@
 package com.andrielgaming.agwarchest;
 
 import java.util.stream.Collectors;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.andrielgaming.agwarchest.init.BlockInit;
+import com.andrielgaming.agwarchest.init.EnchantInit;
 import com.andrielgaming.agwarchest.init.ItemInit;
 import com.andrielgaming.agwarchest.init.ModEntityTypes;
+import com.andrielgaming.agwarchest.network.AGWarchestPacketHandler;
 import com.andrielgaming.agwarchest.util.render.C4EntityRender;
 import com.andrielgaming.agwarchest.util.render.MCRenderer;
-import net.minecraft.entity.EntityType;
+
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,11 +52,14 @@ public class WarchestMaster
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         ModEntityTypes.ENTITY_TYPES.register(modEventBus);
+        EnchantInit.ENCHANTMENTS.register(modEventBus);
         
         instance = this;
         
         //Registers serverside and for other game events
         MinecraftForge.EVENT_BUS.register(this);//TNTRenderer
+        AGWarchestPacketHandler ag = new AGWarchestPacketHandler("agwar");
+        AGWarchestPacketHandler.register();
     }
     
     @SubscribeEvent

@@ -1,0 +1,31 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ogo",
+		"ded",
+		"ogo"
+	],
+	"key": 
+	{
+		"o": 
+		{
+			"item": "minecraft:crying_obsidian"
+		},
+		"g": 
+		{
+			"item": "minecraft:gold_ingot"
+		},
+		"d": 
+		{
+			"item": "minecraft:diamond"
+		},
+		"e": 
+		{
+			"item": "minecraft:end_crystal"
+		}
+	},
+	"result": 
+	{
+		"item": "agwarchest:totem_attuner"
+	}
+}

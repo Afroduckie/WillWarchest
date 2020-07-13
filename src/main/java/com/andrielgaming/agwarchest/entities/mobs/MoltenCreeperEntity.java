@@ -282,8 +282,8 @@ public class MoltenCreeperEntity extends MonsterEntity implements IChargeableMob
    {
 	  if(this.rand.nextInt(650) == 0 && !this.isSilent()) 
       {
-         this.world.playSound(this.getPosX() + 0.5D, this.getPosY() + 0.5D, this.getPosZ() + 0.5D, SoundEvents.ENTITY_BLAZE_DEATH, this.getSoundCategory(), 0.4F + this.rand.nextFloat(), this.rand.nextFloat() * 0.3F + 0.05F, true);
-         this.world.playSound(this.getPosX() + 0.5D, this.getPosY() + 0.5D, this.getPosZ() + 0.5D, SoundEvents.ENTITY_RAVAGER_DEATH, this.getSoundCategory(), 0.2F + this.rand.nextFloat(), this.rand.nextFloat() * 0.3F + 0.05F, true);
+         this.world.playSound(this.getPosX() + 0.5D, this.getPosY() + 0.5D, this.getPosZ() + 0.5D, SoundEvents.ENTITY_BLAZE_DEATH, this.getSoundCategory(), 0.05F + this.rand.nextFloat(), this.rand.nextFloat() * 0.3F + 0.05F, true);
+         this.world.playSound(this.getPosX() + 0.5D, this.getPosY() + 0.5D, this.getPosZ() + 0.5D, SoundEvents.ENTITY_RAVAGER_DEATH, this.getSoundCategory(), 0.05F + this.rand.nextFloat(), this.rand.nextFloat() * 0.3F + 0.05F, true);
       }	      
 	  world.addParticle(ParticleTypes.FLAME, this.getPosXRandom(0.5D), this.getPosYRandom(), this.getPosZRandom(0.5D), 0.0D, 0.0D, 0.0D);
   	  if(this.rand.nextInt(15) == 0) 

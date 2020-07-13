@@ -313,11 +313,11 @@ public class FluidExplosion extends Explosion
 	               BlockPos temp = blockpos2.down().down();
 	               BlockPos temp2 = blockpos2.down();
 	               this.world.setBlockState(temp2, Blocks.MAGMA_BLOCK.getDefaultState());
-	               if (mode == FluidExplosion.Mode.LAVA && this.random.nextInt(4) == 0 )//&& world.getBlockState(blockpos2).getBlock() == Blocks.AIR) 
+	               if (mode == FluidExplosion.Mode.LAVA && this.random.nextInt(2) == 0 )//&& world.getBlockState(blockpos2).getBlock() == Blocks.AIR) 
 	               {
 	            	  this.world.setBlockState(temp, Blocks.LAVA.getDefaultState());
 	               }
-	               if (mode == FluidExplosion.Mode.LAVA && this.random.nextInt(4) == 0 )//&& world.getBlockState(blockpos2).getBlock() == Blocks.AIR) 
+	               if (mode == FluidExplosion.Mode.LAVA && this.random.nextInt(7) == 0 )//&& world.getBlockState(blockpos2).getBlock() == Blocks.AIR) 
 	               {
 	            	  this.world.setBlockState(temp2, Blocks.LAVA.getDefaultState());
 	               }
