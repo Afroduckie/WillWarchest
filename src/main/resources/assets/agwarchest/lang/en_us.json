@@ -3,5 +3,7 @@
  	"item.agwarchest.detonator": "Remote Detonator",
 	"item.agwarchest.molten_creeper_spawn_egg": "Molten Creeper Spawn Egg",
 	"item.agwarchest.totem_attuner": "Totem of Attunement",
-	"enchantment.agwarchest.attuned": "Attuned"
+	"enchantment.agwarchest.attuned": "Attuned",
+	"enchantment.agwarchest.attuned_mending": "Attuned Mending",
+	"enchantment.agwarchest.attuned_multishot": "Attuned Multishot"
  }

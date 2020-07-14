@@ -2,6 +2,7 @@ package com.andrielgaming.agwarchest.items;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import javax.annotation.Nullable;
 
@@ -64,67 +65,72 @@ public class TotemAttuner extends Item implements IVanishable
 		if((it.getGroup() == ItemGroup.TOOLS || it.getGroup() == ItemGroup.COMBAT) && (tools.isEnchanted()))
 		{
 			Map<Enchantment, Integer> tempench = EnchantmentHelper.getEnchantments(tools);
+			Map<Enchantment, Integer> tempench2 = EnchantmentHelper.getEnchantments(tools);
 			
 			//Run a quick loop through the enchantments on this item to make sure Attuned 
 			// 	isn't there so tools can't be attuned twice
-			for (Map.Entry<Enchantment, Integer> entry : tempench.entrySet()) 
+			for (Map.Entry<Enchantment, Integer> entry : tempench2.entrySet()) 
 			{
 				if(entry.getKey() instanceof AttunedEnchant)
 					return ActionResult.resultFail(playerIn.getHeldItem(handIn));
 			}
 			
-			//If that check passes, strengthen the actual enchantments
-			for (Map.Entry<Enchantment, Integer> entry : tempench.entrySet()) 
+			//Add Blindness effect because 2spooky4mii
+			playerIn.addPotionEffect(new EffectInstance(Effects.BLINDNESS, (int)80, (int)0));
+			
+			//Add Soul particles because am scare
+			for(int i = 0;i<80;i++)
 			{
-				//Add Blindness effect because 2spooky4mii
-				playerIn.addPotionEffect(new EffectInstance(Effects.BLINDNESS, (int)80, (int)0));
-				
-				//Add Soul particles because am scare
-				for(int i = 0;i<80;i++)
-				{
-					worldIn.addParticle(ParticleTypes.field_239812_C_, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);
-					worldIn.addParticle(ParticleTypes.PORTAL, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);	  
-				}
-				
-				//Send the Totem Animation packet request so the engine will actually render the stupid animation
-				AGWarchestPacketHandler.sendToClient(new DoTotemAnim(playerIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND)), playerIn);
-				
-				//Exclude incompatible enchantments since the totem will have to apply special ones for them
-				if(!(entry.getKey() != Enchantments.MULTISHOT) && 
-						!(entry.getKey() != Enchantments.INFINITY) && 
-						!(entry.getKey() != Enchantments.CHANNELING) &&
-						!(entry.getKey() != Enchantments.BINDING_CURSE) &&
-						!(entry.getKey() != Enchantments.VANISHING_CURSE) &&
-						!(entry.getKey() != Enchantments.FLAME) &&
-						!(entry.getKey() != Enchantments.MENDING) &&
-						!(entry.getKey() != Enchantments.SILK_TOUCH) &&
-						tempench.get(entry.getKey()) >= 2)
-				{
-					tempench.put(entry.getKey(), tempench.get(entry.getKey())*2);
-				}
-				else if(!(entry.getKey() instanceof AttunedEnchant))
-					tempench.put(entry.getKey(), 2);
-				//Apply special attunements for the enchantments that can't simply be doubled in strength
-				else
-				{
-					//TODO Switch case through each of the above excluded types and apply an Attuned variant.
-				}
-
-				//Set the new enchantment level
-				EnchantmentHelper.setEnchantments(tempench, tools);
-
-				//Play spooki noises
-				playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, 2.5F, 0.7F);
-				playerIn.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.BLOCKS, 0.4F, 0.75F);
-				playerIn.playSound(SoundEvents.ENTITY_WITCH_CELEBRATE, SoundCategory.BLOCKS, 1.0F, 0.25F);
-				
-				//Break the totem
-				ItemStack itemstack = playerIn.getHeldItem(handIn);
-				itemstack.damageItem(15, playerIn, (p_220000_1_) -> {
-		               p_220000_1_.sendBreakAnimation(handIn);
-		            });
-				playerIn.addStat(Stats.ITEM_USED.get(this));
+				worldIn.addParticle(ParticleTypes.field_239812_C_, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);
+				worldIn.addParticle(ParticleTypes.PORTAL, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);	  
 			}
+			
+			//Send the Totem Animation packet request so the engine will actually render the stupid animation
+			AGWarchestPacketHandler.sendToClient(new DoTotemAnim(playerIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND)), playerIn);
+			
+			//Set up a Stack for storing enchantments the totem needs to remove since I cant remove from the map while iterating
+			Stack<Enchantment> rem = new Stack<>();
+			
+			//If that check passes, strengthen the actual enchantments
+			for(Map.Entry<Enchantment, Integer> entry : tempench.entrySet()) 
+			{				
+				//Exclude incompatible enchantments since the totem will have to apply special ones for them
+				if(entry.getKey() != Enchantments.MULTISHOT && entry.getKey() != Enchantments.INFINITY && entry.getKey() != Enchantments.CHANNELING && entry.getKey() != Enchantments.BINDING_CURSE && entry.getKey() != Enchantments.VANISHING_CURSE && entry.getKey() != Enchantments.FLAME && entry.getKey() != Enchantments.MENDING && entry.getKey() != Enchantments.SILK_TOUCH)
+				{
+					if(tempench.get(entry.getKey()) >= 2)
+						tempench.put(entry.getKey(), entry.getValue()*2);
+					else 
+						tempench.put(entry.getKey(), 2);
+				}
+				//Apply special attunements for the enchantments that can't simply be doubled in strength
+				if(entry.getKey() == Enchantments.MULTISHOT)
+				{
+					tools.addEnchantment(EnchantInit.ATTUNED_MULTISHOT.get(), 1);
+					rem.push(entry.getKey());
+				}
+					
+				if(entry.getKey() == Enchantments.MENDING)
+				{
+					tools.addEnchantment(EnchantInit.ATTUNED_MENDING.get(), 1);
+					rem.push(entry.getKey());
+				}
+			}	
+			//Set the new enchantment level and remove the old enchantments if necessary
+			while(!rem.isEmpty())
+				tempench.remove(rem.pop());
+			EnchantmentHelper.setEnchantments(tempench, tools);
+
+			//Play spooki noises
+			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, 2.5F, 0.7F);
+			playerIn.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.BLOCKS, 0.4F, 0.75F);
+			playerIn.playSound(SoundEvents.ENTITY_WITCH_CELEBRATE, SoundCategory.BLOCKS, 1.0F, 0.25F);
+			
+			//Break the totem
+			ItemStack itemstack = playerIn.getHeldItem(handIn);
+			itemstack.damageItem(15, playerIn, (p_220000_1_) -> {
+	               p_220000_1_.sendBreakAnimation(handIn);
+	            });
+			playerIn.addStat(Stats.ITEM_USED.get(this));
 			
 			//Add the Attuned enchant so this item can't be attuned twice
 			tools.addEnchantment(EnchantInit.ATTUNED.get(), 1);

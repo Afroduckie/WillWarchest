@@ -2,6 +2,7 @@ package com.andrielgaming.agwarchest.init;
 
 import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.enchantments.AttunedEnchant;
+import com.andrielgaming.agwarchest.enchantments.AttunedMending;
 import com.andrielgaming.agwarchest.enchantments.AttunedMultishot;
 
 import net.minecraft.enchantment.Enchantment;
@@ -22,4 +23,7 @@ public class EnchantInit
 	
 	public static final RegistryObject<Enchantment> ATTUNED_MULTISHOT = ENCHANTMENTS.register("attuned_multishot",
 			() -> new AttunedMultishot(Rarity.RARE, EquipmentSlotType.values()));
+	
+	public static final RegistryObject<Enchantment> ATTUNED_MENDING = ENCHANTMENTS.register("attuned_mending",
+			() -> new AttunedMending(Rarity.RARE, EquipmentSlotType.values()));
 }

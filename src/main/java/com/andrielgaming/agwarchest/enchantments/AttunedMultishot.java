@@ -10,6 +10,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,9 +53,8 @@ public class AttunedMultishot extends Enchantment
 	      return super.canApplyTogether(ench) && ench != Enchantments.PIERCING;
 	   }
 	   
-	   //Uses the event subscriber bus to attempt to grab the crossbow item being used on
-	   // occurrence of a RightClickItem event, meaning when the player tries to shoot.
-	   @Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
+	   //Tries to grab when player uses the crossbow via RightClickItem event rather than ArrowLoose or nock
+	   @Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
 	   public static class AttunedMultishotEquipped
 	   {
 			@SubscribeEvent
@@ -65,36 +66,49 @@ public class AttunedMultishot extends Enchantment
 				World world = player.world;
 				ItemStack bow = event.getItemStack();
 			
-				//Checks if bow loaded, adds up to 10 additional arrows
 				if(bow.getItem() == Items.CROSSBOW && bow.isEnchanted() && EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MULTISHOT.get(), bow) > 0)
 				{
 					 CrossbowItem temp = (CrossbowItem)bow.getItem();
-					 if(temp.isCharged(bow))
+					 if(!temp.isCharged(bow))
 					 {
-						 CompoundNBT compoundnbt = bow.getOrCreateTag();
-					     ListNBT listnbt;
-					     if(compoundnbt.contains("ChargedProjectiles", 9)) 
-					     {
-					        listnbt = compoundnbt.getList("ChargedProjectiles", 10);
-					     } 
-					     else 
-					     {
-					        listnbt = new ListNBT();
-					     }
-					     for(int x = 0;x<8;x++)
-					     {
-					    	 if(rand.nextInt(9)>0)
-					    	 {
-					    		 CompoundNBT compoundnbt1 = new CompoundNBT();
-							     bow.write(compoundnbt1);
-					    		 listnbt.add(compoundnbt1); 
-					    	 } 
-					     }
-					     compoundnbt.put("ChargedProjectiles", listnbt);
+						 chargeShots(bow, 3);
+					 }
+					 //public static void fireProjectiles(World worldIn, LivingEntity shooter, Hand handIn, ItemStack stack, float velocityIn, float inaccuracyIn) {
+					 if(temp.isCharged(bow) && temp.canContinueUsing(bow, event.getItemStack()))
+					 {
+						 temp.fireProjectiles(world, player, player.getActiveHand(), bow, 1.6F, 0.75F);
+						 chargeShots(bow, 3);
+						 temp.setCharged(bow, true);
+						 //Consume an extra 2 arrows
+						 temp.getHeldAmmo(player, CrossbowItem.ARROWS).shrink(2);;
 					 }
 				}
 			}
+			
+			public static void chargeShots(ItemStack bow, int cnt)
+			{
+				CompoundNBT compoundnbt1;
+				ListNBT listnbt;
+				for(int i = 0;i<cnt;i++)
+				{
+					CompoundNBT compoundnbt = bow.getOrCreateTag();
+				    if(compoundnbt.contains("ChargedProjectiles", 9)) 
+				    {
+				        listnbt = compoundnbt.getList("ChargedProjectiles", 10);
+				    } 
+				    else 
+				    {
+				        listnbt = new ListNBT();
+				    }
+				    compoundnbt1 = new CompoundNBT();
+					bow.write(compoundnbt1);
+					listnbt.add(compoundnbt1);
+				    compoundnbt.put("ChargedProjectiles", listnbt);
+				}
+			}
 		}
+	   
+	   
 }
 
 //SilkTouchEnchantment
