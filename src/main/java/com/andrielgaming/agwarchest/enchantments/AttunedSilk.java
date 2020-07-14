@@ -49,7 +49,7 @@ public class AttunedSilk extends Enchantment
 	@Override
 	public ITextComponent getDisplayName(int level) 
 	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Attuned");
+	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Silk Touch II");
 	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 	      return iformattabletextcomponent;
 	}

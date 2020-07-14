@@ -43,13 +43,13 @@ public class AttunedFlame extends Enchantment
 	@Override
 	public String getName() 
 	{
-	    return this.getDefaultTranslationKey();
+	    return "Enhanced Flame";
 	}
 
 	@Override
 	public ITextComponent getDisplayName(int level) 
 	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Attuned");
+	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Flame II");
 	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 	      return iformattabletextcomponent;
 	}

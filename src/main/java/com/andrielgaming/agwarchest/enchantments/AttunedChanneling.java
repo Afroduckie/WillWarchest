@@ -43,13 +43,13 @@ public class AttunedChanneling extends Enchantment
 	@Override
 	public String getName() 
 	{
-	    return this.getDefaultTranslationKey();
+	    return "Enhanced Channeling";
 	}
 
 	@Override
 	public ITextComponent getDisplayName(int level) 
 	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Attuned");
+	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Channeling II");
 	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 	      return iformattabletextcomponent;
 	}

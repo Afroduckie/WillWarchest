@@ -69,14 +69,14 @@ public class AttunedEnchant extends Enchantment
 	@Override
 	public String getName() 
 	{
-	    return this.getDefaultTranslationKey();
+	    return "May this artifact bless your travels...";
 	}
 
 	@Override
 	public ITextComponent getDisplayName(int level) 
 	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Attuned");
-	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
+	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Totem Attuned");
+	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_BLUE);
 	      return iformattabletextcomponent;
 	}
 	

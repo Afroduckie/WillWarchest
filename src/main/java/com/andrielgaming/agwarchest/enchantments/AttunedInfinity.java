@@ -54,13 +54,13 @@ public class AttunedInfinity extends Enchantment
 	@Override
 	public String getName() 
 	{
-	    return this.getDefaultTranslationKey();
+	    return "Enhanced Infinity";
 	}
 
 	@Override
 	public ITextComponent getDisplayName(int level) 
 	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Attuned");
+	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Infinity II");
 	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 	      return iformattabletextcomponent;
 	}
