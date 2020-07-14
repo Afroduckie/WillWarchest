@@ -2,11 +2,9 @@ package com.andrielgaming.agwarchest.items;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.annotation.Nullable;
 
-import com.andrielgaming.agwarchest.enchantments.AttunedEnchant;
 import com.andrielgaming.agwarchest.init.EnchantInit;
 import com.andrielgaming.agwarchest.network.AGWarchestPacketHandler;
 import com.andrielgaming.agwarchest.util.packettype.DoTotemAnim;
@@ -60,11 +58,11 @@ public class TotemAttuner extends Item implements IVanishable
 		//Grab reference to offhand item
 		ItemStack tools = playerIn.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
 		Item it = tools.getItem();
-
+		
 		//Currently only works on tools and weapons, can add for armor later
 		if((it.getGroup() == ItemGroup.TOOLS || it.getGroup() == ItemGroup.COMBAT) && (tools.isEnchanted()))
 		{
-			Map<Enchantment, Integer> tempench = EnchantmentHelper.getEnchantments(tools);
+			/*Map<Enchantment, Integer> tempench = EnchantmentHelper.getEnchantments(tools);
 			Map<Enchantment, Integer> tempench2 = EnchantmentHelper.getEnchantments(tools);
 			
 			//Run a quick loop through the enchantments on this item to make sure Attuned 
@@ -73,7 +71,7 @@ public class TotemAttuner extends Item implements IVanishable
 			{
 				if(entry.getKey() instanceof AttunedEnchant)
 					return ActionResult.resultFail(playerIn.getHeldItem(handIn));
-			}
+			}*/
 			
 			//Add Blindness effect because 2spooky4mii
 			playerIn.addPotionEffect(new EffectInstance(Effects.BLINDNESS, (int)80, (int)0));
@@ -88,38 +86,6 @@ public class TotemAttuner extends Item implements IVanishable
 			//Send the Totem Animation packet request so the engine will actually render the stupid animation
 			AGWarchestPacketHandler.sendToClient(new DoTotemAnim(playerIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND)), playerIn);
 			
-			//Set up a Stack for storing enchantments the totem needs to remove since I cant remove from the map while iterating
-			Stack<Enchantment> rem = new Stack<>();
-			
-			//If that check passes, strengthen the actual enchantments
-			for(Map.Entry<Enchantment, Integer> entry : tempench.entrySet()) 
-			{				
-				//Exclude incompatible enchantments since the totem will have to apply special ones for them
-				if(entry.getKey() != Enchantments.MULTISHOT && entry.getKey() != Enchantments.INFINITY && entry.getKey() != Enchantments.CHANNELING && entry.getKey() != Enchantments.BINDING_CURSE && entry.getKey() != Enchantments.VANISHING_CURSE && entry.getKey() != Enchantments.FLAME && entry.getKey() != Enchantments.MENDING && entry.getKey() != Enchantments.SILK_TOUCH)
-				{
-					if(tempench.get(entry.getKey()) >= 2)
-						tempench.put(entry.getKey(), entry.getValue()*2);
-					else 
-						tempench.put(entry.getKey(), 2);
-				}
-				//Apply special attunements for the enchantments that can't simply be doubled in strength
-				if(entry.getKey() == Enchantments.MULTISHOT)
-				{
-					tools.addEnchantment(EnchantInit.ATTUNED_MULTISHOT.get(), 1);
-					rem.push(entry.getKey());
-				}
-					
-				if(entry.getKey() == Enchantments.MENDING)
-				{
-					tools.addEnchantment(EnchantInit.ATTUNED_MENDING.get(), 1);
-					rem.push(entry.getKey());
-				}
-			}	
-			//Set the new enchantment level and remove the old enchantments if necessary
-			while(!rem.isEmpty())
-				tempench.remove(rem.pop());
-			EnchantmentHelper.setEnchantments(tempench, tools);
-
 			//Play spooki noises
 			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, 2.5F, 0.7F);
 			playerIn.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.BLOCKS, 0.4F, 0.75F);
@@ -132,6 +98,9 @@ public class TotemAttuner extends Item implements IVanishable
 	            });
 			playerIn.addStat(Stats.ITEM_USED.get(this));
 			
+			//Add any attuned variants
+			//tools.addEnchantment(EnchantInit.ATTUNED_MULTISHOT.get(), 2);
+			
 			//Add the Attuned enchant so this item can't be attuned twice
 			tools.addEnchantment(EnchantInit.ATTUNED.get(), 1);
 
@@ -139,7 +108,53 @@ public class TotemAttuner extends Item implements IVanishable
 			return ActionResult.resultPass(playerIn.getHeldItem(handIn));
 		}
 		return ActionResult.resultFail(playerIn.getHeldItem(handIn));
-	}//EnchantedBookItem
+	}
+			
+	
+	private Enchantment processEnchant(ItemStack item, PlayerEntity player, Hand handIn)
+	{
+		//Check for instances of the Attuned enchant, return null if found
+		Map<Enchantment, Integer> magic = EnchantmentHelper.getEnchantments(item);
+		if(magic.containsKey(EnchantInit.ATTUNED.get()))
+			return null;		//Essentially tells Totem that this item can't be attuned again
+		//Check for instances of each of the other complex enchantments. There isn't a pretty way to do this, so... yeah
+		if(magic.containsKey(Enchantments.CHANNELING))
+		{
+			magic.remove(Enchantments.CHANNELING);
+			magic.put(EnchantInit.ATTUNED_CHANNELING.get(), 1);
+		}
+		if(magic.containsKey(Enchantments.FLAME))
+			magic.put(processComplex(item, player, handIn, Enchantments.FLAME, magic), magic.get(Enchantments.FLAME));
+		if(magic.containsKey(Enchantments.INFINITY))
+			magic.put(processComplex(item, player, handIn, Enchantments.INFINITY, magic), magic.get(Enchantments.INFINITY));
+		if(magic.containsKey(Enchantments.MENDING))
+			magic.put(processComplex(item, player, handIn, Enchantments.MENDING, magic), magic.get(Enchantments.MENDING));
+		if(magic.containsKey(Enchantments.MULTISHOT))
+			magic.put(processComplex(item, player, handIn, Enchantments.MULTISHOT, magic), magic.get(Enchantments.MULTISHOT));
+		if(magic.containsKey(Enchantments.SILK_TOUCH))
+			magic.put(processComplex(item, player, handIn, Enchantments.SILK_TOUCH, magic), magic.get(Enchantments.SILK_TOUCH));
+		
+		
+		
+		return null;	
+	}
+	
+	private Enchantment processComplex(ItemStack item, PlayerEntity player, Hand handIn, Enchantment en, Map<Enchantment, Integer> magic)
+	{
+		if(magic.containsKey(Enchantments.CHANNELING))
+			
+		if(magic.containsKey(Enchantments.FLAME))
+			
+		if(magic.containsKey(Enchantments.INFINITY))
+			
+		if(magic.containsKey(Enchantments.MENDING))
+			
+		if(magic.containsKey(Enchantments.MULTISHOT))
+			
+		if(magic.containsKey(Enchantments.SILK_TOUCH))
+		{}
+		return null;
+	}
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) 

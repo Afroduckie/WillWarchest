@@ -17,6 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
@@ -33,26 +37,68 @@ public class AttunedMultishot extends Enchantment
 	      super(p_i50017_1_, EnchantmentType.CROSSBOW, p_i50017_2_);
 	   }
 
-	   public int getMinEnchantability(int enchantmentLevel) 
-	   {
-	      return 20;
-	   }
+	   @Override
+		public int getMaxLevel() 
+		{
+			return 1;
+		}
 
-	   public int getMaxEnchantability(int enchantmentLevel) 
-	   {
-	      return 50;
-	   }
+		@Override
+		public int getMinLevel() 
+		{
+			return 1;
+		}
 
-	   public int getMaxLevel() 
-	   {
-	      return 1;
-	   }
+		@Override
+		protected boolean canApplyTogether(Enchantment ench) 
+		{
+			return true;
+		}
 
-	   public boolean canApplyTogether(Enchantment ench) 
-	   {
-	      return super.canApplyTogether(ench) && ench != Enchantments.PIERCING;
-	   }
-	   
+		@Override
+		public int getMinEnchantability(int enchantmentLevel) 
+		{
+		    return 0;
+		}
+		
+		@Override
+		public String getName() 
+		{
+		    return this.getDefaultTranslationKey();
+		}
+
+		@Override
+		public ITextComponent getDisplayName(int level) 
+		{
+		      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Attuned");
+		      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
+		      return iformattabletextcomponent;
+		}
+		
+		@Override
+		public boolean isTreasureEnchantment() 
+		{
+		    return false;
+		}
+		
+		@Override
+		public boolean canApplyAtEnchantingTable(ItemStack stack) 
+		{
+		    return false;
+		}
+		
+		@Override
+		public boolean canApply(ItemStack stack) 
+		{
+		    return true;
+		}
+		
+		@Override
+		public boolean isAllowedOnBooks() 
+		{
+		      return false;
+		}
+		
 	   //Tries to grab when player uses the crossbow via RightClickItem event rather than ArrowLoose or nock
 	   @Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
 	   public static class AttunedMultishotEquipped
