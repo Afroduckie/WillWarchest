@@ -1,16 +1,19 @@
 package com.andrielgaming.agwarchest.enchantments;
 
 import com.andrielgaming.agwarchest.WarchestMaster;
+import com.andrielgaming.agwarchest.init.EnchantInit;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantment.Rarity;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -50,11 +53,16 @@ public class AttunedEnchant extends Enchantment
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
 	public static class Attuned 
 	{
-
 		@SubscribeEvent
 		public static void doStuff(PlayerTickEvent event) 
 		{
-			
+			PlayerEntity player = event.player;
+			World world = player.world;
+			if(player.hasItemInSlot(EquipmentSlotType.MAINHAND) && EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(),	player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
+			{
+				//This is where I add enchantment stuff if I ever want Attuned to do something TODO
+				
+			}
 		}
 	}
 	

@@ -14,20 +14,11 @@ public class DoTotemAnim
 {
 	private static ItemStack item;
 	private static ItemStack item2;
-	private static boolean doTwo;
 	
 	@SuppressWarnings("static-access")
 	public DoTotemAnim(ItemStack stack) 
 	{
 		this.item = stack;
-		doTwo = false;
-	}
-	
-	public DoTotemAnim(ItemStack stack, ItemStack stack2) 
-	{
-		this.item = stack;
-		this.item2 = stack2;
-		doTwo = true;
 	}
 	
 	@SuppressWarnings("static-access")
@@ -45,16 +36,7 @@ public class DoTotemAnim
 	{
 		context.get().enqueueWork(() -> 
 		{
-			World world = context.get().getSender().world;
-			float f = world.getGameTime();
-			if(!doTwo)
-				Minecraft.getInstance().gameRenderer.displayItemActivation(item);
-			else
-			{
-				Minecraft.getInstance().gameRenderer.displayItemActivation(item);
-				for(int i = 0;i<20;i++) {} //Attempt at a delay
-				Minecraft.getInstance().gameRenderer.displayItemActivation(item2);
-			}
+			Minecraft.getInstance().gameRenderer.displayItemActivation(item);
 	    });
 		context.get().setPacketHandled(true);
 	}

@@ -6,15 +6,15 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import com.andrielgaming.agwarchest.enchantments.AttunedEnchant;
+import com.andrielgaming.agwarchest.init.EnchantInit;
 import com.andrielgaming.agwarchest.network.AGWarchestPacketHandler;
 import com.andrielgaming.agwarchest.util.packettype.DoTotemAnim;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,7 +59,7 @@ public class TotemAttuner extends Item implements IVanishable
 		//Grab reference to offhand item
 		ItemStack tools = playerIn.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
 		Item it = tools.getItem();
-		
+
 		//Currently only works on tools and weapons, can add for armor later
 		if((it.getGroup() == ItemGroup.TOOLS || it.getGroup() == ItemGroup.COMBAT) && (tools.isEnchanted()))
 		{
@@ -83,32 +83,40 @@ public class TotemAttuner extends Item implements IVanishable
 				for(int i = 0;i<80;i++)
 				{
 					worldIn.addParticle(ParticleTypes.field_239812_C_, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);
-					worldIn.addParticle(ParticleTypes.field_239818_ar_, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);	  
+					worldIn.addParticle(ParticleTypes.PORTAL, playerIn.getPosXRandom(1.75), playerIn.getPosYRandom(), playerIn.getPosZRandom(1.75), 0.0D, 0.0D, 0.0D);	  
 				}
 				
 				//Send the Totem Animation packet request so the engine will actually render the stupid animation
 				AGWarchestPacketHandler.sendToClient(new DoTotemAnim(playerIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND)), playerIn);
-				if(!(entry.getKey() instanceof AttunedEnchant) && tempench.get(entry.getKey()) >= 2)
+				
+				//Exclude incompatible enchantments since the totem will have to apply special ones for them
+				if(!(entry.getKey() != Enchantments.MULTISHOT) && 
+						!(entry.getKey() != Enchantments.INFINITY) && 
+						!(entry.getKey() != Enchantments.CHANNELING) &&
+						!(entry.getKey() != Enchantments.BINDING_CURSE) &&
+						!(entry.getKey() != Enchantments.VANISHING_CURSE) &&
+						!(entry.getKey() != Enchantments.FLAME) &&
+						!(entry.getKey() != Enchantments.MENDING) &&
+						!(entry.getKey() != Enchantments.SILK_TOUCH) &&
+						tempench.get(entry.getKey()) >= 2)
 				{
 					tempench.put(entry.getKey(), tempench.get(entry.getKey())*2);
 				}
 				else if(!(entry.getKey() instanceof AttunedEnchant))
 					tempench.put(entry.getKey(), 2);
-				
-				//Alternate method of adding the Attuned enchantment since my code is being a bitch and wont apply it normally for some reason
-				//		that I am probably constantly overlooking
-				//tempench.put(new AttunedEnchant(Rarity.COMMON, EnchantmentType.WEAPON, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}), 1);
+				//Apply special attunements for the enchantments that can't simply be doubled in strength
+				else
+				{
+					//TODO Switch case through each of the above excluded types and apply an Attuned variant.
+				}
+
 				//Set the new enchantment level
 				EnchantmentHelper.setEnchantments(tempench, tools);
-				//EnchantingTableTileEntity
-				//Debug chat message
-				//if(!worldIn.isRemote)
-				//	playerIn.sendMessage(new StringTextComponent("񘄺The mystical totem has done something to your tool..."), playerIn.getUniqueID());
-				
+
 				//Play spooki noises
-				playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, 7.0F, 0.7F);
-				playerIn.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.BLOCKS, 0.25F, 0.75F);
-				playerIn.playSound(SoundEvents.ENTITY_WITCH_CELEBRATE, SoundCategory.BLOCKS, 0.55F, 0.35F);
+				playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, 2.5F, 0.7F);
+				playerIn.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.BLOCKS, 0.4F, 0.75F);
+				playerIn.playSound(SoundEvents.ENTITY_WITCH_CELEBRATE, SoundCategory.BLOCKS, 1.0F, 0.25F);
 				
 				//Break the totem
 				ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -117,10 +125,10 @@ public class TotemAttuner extends Item implements IVanishable
 		            });
 				playerIn.addStat(Stats.ITEM_USED.get(this));
 			}
-			//Add the Attuned enchant so this item can't be attuned twice
-			//This is giving me some shit for some reason TODO
-			tools.addEnchantment(new AttunedEnchant(Rarity.RARE, EnchantmentType.BREAKABLE, new EquipmentSlotType[]{EquipmentSlotType.OFFHAND}), 1);
 			
+			//Add the Attuned enchant so this item can't be attuned twice
+			tools.addEnchantment(EnchantInit.ATTUNED.get(), 1);
+
 			//Done! Hopefully nothing broke. Except the totem. Cus that's spose to happen.
 			return ActionResult.resultPass(playerIn.getHeldItem(handIn));
 		}

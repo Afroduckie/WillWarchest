@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.entities.goals.MoltenCreeperSwellGoal;
 import com.andrielgaming.agwarchest.world.FluidExplosion;
 
@@ -52,16 +53,19 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.IExplosionContext;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.DifficultyChangeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
 public class MoltenCreeperEntity extends MonsterEntity implements IChargeableMob 
 {
    private static final DataParameter<Integer> STATE = EntityDataManager.createKey(MoltenCreeperEntity.class, DataSerializers.VARINT);
@@ -100,6 +104,24 @@ public class MoltenCreeperEntity extends MonsterEntity implements IChargeableMob
       this.stepHeight = 1.0F;
    }
 
+   @SubscribeEvent
+   @SuppressWarnings("incomplete-switch")
+   public void updateFuse(DifficultyChangeEvent e)
+   {
+	   switch(e.getDifficulty())
+	   {
+		      case EASY:
+		    	  fuseTime = 40;
+		    	  break;
+		      case NORMAL:
+		    	  fuseTime = 35;
+		    	  break;
+		      case HARD:
+		    	  fuseTime = 25;
+		    	  break; 	  
+	   }
+   }
+   
    @Override
    protected void registerGoals() 
    {

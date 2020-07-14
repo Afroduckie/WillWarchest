@@ -2,6 +2,7 @@ package com.andrielgaming.agwarchest.init;
 
 import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.enchantments.AttunedEnchant;
+import com.andrielgaming.agwarchest.enchantments.AttunedMultishot;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantment.Rarity;
@@ -18,5 +19,7 @@ public class EnchantInit
 
 	public static final RegistryObject<Enchantment> ATTUNED = ENCHANTMENTS.register("attuned",
 			() -> new AttunedEnchant(Rarity.RARE, EnchantmentType.BREAKABLE, EquipmentSlotType.values()));
+	
+	public static final RegistryObject<Enchantment> ATTUNED_MULTISHOT = ENCHANTMENTS.register("attuned_multishot",
+			() -> new AttunedMultishot(Rarity.RARE, EquipmentSlotType.values()));
 }
-//EnchantingTableBlock
