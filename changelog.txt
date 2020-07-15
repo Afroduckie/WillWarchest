@@ -1,3 +1,114 @@
+Build: 1.16.1-32.0.66 - Tue Jul 14 00:15:41 GMT 2020
+	darklime:
+		Make all functions in Style common. (#6931)
+
+=========
+Build: 1.16.1-32.0.65 - Mon Jul 13 22:44:53 GMT 2020
+	55965249+seymourimadeit:
+		Mark Raid.WaveMembers as an extensible enum. (#6878)
+
+=========
+Build: 1.16.1-32.0.64 - Mon Jul 13 22:17:58 GMT 2020
+	lex:
+		Fix checkPatches task. Closes #6956
+		Fix patched in method using srg name. Closes #6965
+		Fix capabilities not being collected for ClientWorld. Closes #6966
+		Fix TagEmptyCondition using client side copy of tags instead of server. Closes #6949
+		Fix ExtendedButton using narrator text. Closes #6958, Closes #6959
+		Fix misaligned patch in RepairContainer. Closes #6950, Closes #6953
+		Fix LivingJumpEvent not being fired for players jumping horses. Closes #6929
+		Remove extra getToughness method in ArmorItem. Closes #6970
+		Remove GetCollisionBoxesEvent. Closes #6921
+
+=========
+Build: 1.16.1-32.0.63 - Fri Jul 10 22:28:22 GMT 2020
+	richard:
+		Fix race condition with DeferredRegister for custom registries (#6951)
+
+=========
+Build: 1.16.1-32.0.62 - Fri Jul 10 17:49:51 GMT 2020
+	arnoldnunag12+github:
+		Remove hooks into beacon base/payments. Vanilla uses tags now for extensibility. (#6948)
+
+=========
+Build: 1.16.1-32.0.61 - Wed Jul 08 21:33:38 GMT 2020
+	jaredlll08:
+		Expose the DataPackRegistries instance to the AddReloadListenerEvent (#6933)
+
+=========
+Build: 1.16.1-32.0.60 - Wed Jul 08 21:13:18 GMT 2020
+	arnoldnunag12+github:
+		Fix canRepair not being set true as default (#6936)
+		
+		Closes #6934 and #6935
+
+=========
+Build: 1.16.1-32.0.59 - Wed Jul 08 14:56:39 GMT 2020
+	David Quintana:
+		Fix particles sometimes "losing" the lightmap and drawing fullbright.
+
+	David Quintana:
+		Fix misaligned patch causing LivingEquipmentChangeEvent to never be posted.
+
+=========
+Build: 1.16.1-32.0.57 - Mon Jul 06 21:32:33 GMT 2020
+	JDLogic:
+		Add simple patch checker and cleanup patches (#6851)
+		
+		* Add simple patch checker and cleanup patches
+		
+		* Address comments
+		 * move task implementation
+		 * genPatches is now finalized by checkPatches
+		 * the S2S artifacts are automatically removed
+		 * added class and method access checking
+
+=========
+Build: 1.16.1-32.0.56 - Mon Jul 06 21:27:02 GMT 2020
+	richard:
+		Fix the modifier combined name for keybinds displaying two pluses outside of forgedev #6901 (#6902)
+
+=========
+Build: 1.16.1-32.0.55 - Mon Jul 06 21:12:45 GMT 2020
+	richard:
+		Fix harvest level and tool type not actually getting set #6906 (#6922)
+
+=========
+Build: 1.16.1-32.0.54 - Mon Jul 06 20:46:01 GMT 2020
+	richard:
+		Reimplement ITeleporter Patches (#6886)
+
+=========
+Build: 1.16.1-32.0.53 - Mon Jul 06 20:39:37 GMT 2020
+	40738104+Mysterious-Dev:
+		Add function to add items with the same behavior as the pumpkin for enderman (#6890)
+
+=========
+Build: 1.16.1-32.0.52 - Mon Jul 06 20:33:17 GMT 2020
+	richard:
+		Custom Item integration with Piglins (#6914)
+
+=========
+Build: 1.16.1-32.0.51 - Mon Jul 06 20:20:02 GMT 2020
+	ichttt:
+		Some dead code cleanup, and re-implement some bed hooks. (#6903)
+
+=========
+Build: 1.16.1-32.0.50 - Mon Jul 06 20:06:39 GMT 2020
+	diesieben07:
+		Fix missing null checks in ForgeIngameGui (#6907)
+
+=========
+Build: 1.16.1-32.0.49 - Mon Jul 06 19:50:02 GMT 2020
+	arnoldnunag12+github:
+		Fix swap offhand keybind not working in GUIs (#6920)
+
+=========
+Build: 1.16.1-32.0.48 - Mon Jul 06 19:42:07 GMT 2020
+	thpetuaudletang:
+		New AddReloadListenerEvent that gathers server side data reload handlers. (#6849)
+
+=========
 Build: 1.16.1-32.0.47 - Fri Jul 03 12:40:42 GMT 2020
 	David Quintana:
 		Attempt to use a more compatible method to initialize stencil support.
@@ -220,6 +331,34 @@ Build: 1.16.1-32.0.7 - Fri Jun 26 02:30:54 GMT 2020
 
 =========
 Build: 1.16.1-32.0.6 - Fri Jun 26 01:52:19 GMT 2020
+	thpetuaudletang:
+		Fix locate command (#6811)
+
+	thpetuaudletang:
+		Fix block drops (#6810)
+
+	contact:
+		Add missing patch to ScreenShotHelper (#6809)
+		
+		Adds the missed patch back
+
+	Yunus1903:
+		Updated MDK mods.toml versions (#6808)
+
+	thpetuaudletang:
+		Fix locate command (#6811)
+
+	thpetuaudletang:
+		Fix block drops (#6810)
+
+	contact:
+		Add missing patch to ScreenShotHelper (#6809)
+		
+		Adds the missed patch back
+
+	Yunus1903:
+		Updated MDK mods.toml versions (#6808)
+
 	thpetuaudletang:
 		Fix locate command (#6811)
 

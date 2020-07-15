@@ -44,7 +44,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                agwarchest {
+                WillWarchest {
                     source sourceSets.main
                 }
             }
@@ -60,7 +60,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                agwarchest {
+                WillWarchest {
                     source sourceSets.main
                 }
             }
@@ -78,7 +78,7 @@ minecraft {
             args '--mod', 'agwarchest', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                agwarchest {
+                WillWarchest {
                     source sourceSets.main
                 }
             }
@@ -90,7 +90,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.47'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.66'
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -119,7 +119,7 @@ jar {
             "Specification-Title": "agwarchest",
             "Specification-Vendor": "andrielgaming",
             "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": warchest.will,
+            "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"andrielgaming",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
