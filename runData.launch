@@ -6,7 +6,7 @@
         <mapEntry key="MCP_MAPPINGS" value="snapshot_20200514-1.16"/>
         <mapEntry key="MCP_VERSION" value="20200625.160719"/>
         <mapEntry key="MC_VERSION" value="1.16.1"/>
-        <mapEntry key="MOD_CLASSES" value="agwarchest%%E:\ForgeSRC16\WillWarchest\bin\main;"/>
+        <mapEntry key="MOD_CLASSES" value="WillWarchest%%E:\ForgeSRC16\WillWarchest\bin\main;WillWarchest%%E:\ForgeSRC16\WillWarchest\bin\main"/>
         <mapEntry key="target" value="fmluserdevdata"/>
     </mapAttribute>
     <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.buildship.core.classpathprovider"/>

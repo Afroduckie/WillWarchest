@@ -6,7 +6,7 @@
         <mapEntry key="MCP_MAPPINGS" value="snapshot_20200514-1.16"/>
         <mapEntry key="MCP_VERSION" value="20200625.160719"/>
         <mapEntry key="MC_VERSION" value="1.16.1"/>
-        <mapEntry key="MOD_CLASSES" value="agwarchest%%E:\ForgeSRC16\WillWarchest\bin\main;agwarchest%%E:\ForgeSRC16\WillWarchest\bin\main"/>
+        <mapEntry key="MOD_CLASSES" value="WillWarchest%%E:\ForgeSRC16\WillWarchest\bin\main;WillWarchest%%E:\ForgeSRC16\WillWarchest\bin\main"/>
         <mapEntry key="target" value="fmluserdevserver"/>
     </mapAttribute>
     <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.buildship.core.classpathprovider"/>
@@ -14,5 +14,5 @@
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value=""/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="WillWarchest"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=SCAN,REGISTRIES,REGISTRYDUMP"/>
-    <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="E:\ForgeSRC16\run"/>
+    <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="E:\ForgeSRC16\WillWarchest\run"/>
 </launchConfiguration>

@@ -94,10 +94,15 @@ public class AttunedFlame extends Enchantment
 					BlockPos pos = new BlockPos(hurt.getPosX(), hurt.getPosY(), hurt.getPosZ());
 					World world = hurt.world;
 					//world.setBlockState(pos, Blocks.FIRE.getDefaultState());
-					
 					hurt.func_241209_g_(120);
 				}
 			}
 		}
+		
+		/*@SubscribeEvent
+		public static void doStuff(ModelBakeEvent event)
+		{
+			
+		}*/
 	}
 }
