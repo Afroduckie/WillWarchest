@@ -79,7 +79,8 @@ public class AttunedFlame extends Enchantment
 	{
 		private static PlayerEntity player;
 		private static ItemStack bow;
-
+		private static LivingEntity hurt;
+			
 		// Ideally Flame II will set the enemy on fire with soul fire instead of regular fire
 		@SubscribeEvent
 		public static void doStuff(LivingHurtEvent event)
@@ -90,19 +91,12 @@ public class AttunedFlame extends Enchantment
 				bow = player.getHeldItemMainhand();
 				if(EnchantmentHelper.getEnchantments(bow).containsKey(EnchantInit.ATTUNED_FLAME.get()))
 				{
-					LivingEntity hurt = (LivingEntity)event.getEntity();
+					hurt = (LivingEntity)event.getEntity();
 					BlockPos pos = new BlockPos(hurt.getPosX(), hurt.getPosY(), hurt.getPosZ());
 					World world = hurt.world;
-					//world.setBlockState(pos, Blocks.FIRE.getDefaultState());
-					hurt.func_241209_g_(120);
+					hurt.func_241209_g_(340);
 				}
 			}
 		}
-		
-		/*@SubscribeEvent
-		public static void doStuff(ModelBakeEvent event)
-		{
-			
-		}*/
 	}
 }
