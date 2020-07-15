@@ -74,15 +74,13 @@ public class AttunedFlame extends Enchantment
 	public boolean isAllowedOnBooks()
 	{ return false; }
 
-	// Blocks
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
 	public static class AttunedFlameEquipped
 	{
 		private static PlayerEntity player;
 		private static ItemStack bow;
 
-		// Ideally Flame II will set the enemy on fire with soul fire instead of regular
-		// fire
+		// Ideally Flame II will set the enemy on fire with soul fire instead of regular fire
 		@SubscribeEvent
 		public static void doStuff(LivingHurtEvent event)
 		{
@@ -95,8 +93,9 @@ public class AttunedFlame extends Enchantment
 					LivingEntity hurt = (LivingEntity)event.getEntity();
 					BlockPos pos = new BlockPos(hurt.getPosX(), hurt.getPosY(), hurt.getPosZ());
 					World world = hurt.world;
-					world.setBlockState(pos, Blocks.FIRE.getDefaultState());
-
+					//world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+					
+					hurt.func_241209_g_(99);
 				}
 			}
 		}

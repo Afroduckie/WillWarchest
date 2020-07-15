@@ -8,7 +8,7 @@
     </listAttribute>
     <mapAttribute key="org.eclipse.debug.core.environmentVariables">
         <mapEntry key="FORGE_GROUP" value="net.minecraftforge"/>
-        <mapEntry key="FORGE_VERSION" value="32.0.47"/>
+        <mapEntry key="FORGE_VERSION" value="32.0.66"/>
         <mapEntry key="MCP_MAPPINGS" value="snapshot_20200514-1.16"/>
         <mapEntry key="MCP_VERSION" value="20200625.160719"/>
         <mapEntry key="MC_VERSION" value="1.16.1"/>
@@ -19,6 +19,7 @@
         <mapEntry key="target" value="fmluserdevclient"/>
     </mapAttribute>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.buildship.core.classpathprovider"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="net.minecraftforge.userdev.LaunchTesting"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="WillWarchest"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=SCAN,REGISTRIES,REGISTRYDUMP -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump &quot;-Dos.name=Windows 10&quot; -Dos.version=10.0"/>
