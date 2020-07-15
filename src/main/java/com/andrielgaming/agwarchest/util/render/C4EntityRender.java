@@ -1,10 +1,8 @@
 package com.andrielgaming.agwarchest.util.render;
 
 import javax.annotation.Nullable;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.entities.misc.PrimedC4;
 import com.andrielgaming.agwarchest.init.BlockInit;
@@ -27,76 +25,75 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@SuppressWarnings({"unused", "deprecation"})
 public class C4EntityRender extends EntityRenderer<PrimedC4>
 {
 	private static final Logger LOGGER = LogManager.getLogger();
 	private static final ResourceLocation PRIMED_C4_MODEL = new ResourceLocation(WarchestMaster.MOD_ID, "textures/entities/primed_c4/c4_dummy_entity");
 	private final ModelRenderer bone;
 
-	   public C4EntityRender(EntityRendererManager renderManagerIn) 
-	   {
-	      super(renderManagerIn);
-	      AtlasTexture c4t = new AtlasTexture(PRIMED_C4_MODEL);
-	      this.shadowSize = 0.5F;
-	      bone = new ModelRenderer(new PrimedC4Model());
-	      LOGGER.info("C4 Entity Renderer initialized success! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	   }
+	public C4EntityRender(EntityRendererManager renderManagerIn)
+	{
+		super(renderManagerIn);
+		AtlasTexture c4t = new AtlasTexture(PRIMED_C4_MODEL);
+		this.shadowSize = 0.5F;
+		bone = new ModelRenderer(new PrimedC4Model());
+		// LOGGER.info("C4 Entity Renderer initialized success! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	}
 
-	   @OnlyIn(Dist.CLIENT)
-	   public void render(PrimedC4 entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) 
-	   {
-	      matrixStackIn.push();
-	      matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-	      if ((float)entityIn.getFuse() - partialTicks + 1.0F < 10.0F) 
-	      {
-	         float f = 1.0F - ((float)entityIn.getFuse() - partialTicks + 1.0F) / 10.0F;
-	         f = MathHelper.clamp(f, 0.0F, 1.0F);
-	         f = f * f;
-	         f = f * f;
-	         float f1 = 1.0F + f * 0.3F;
-	         matrixStackIn.scale(f1, f1, f1);
-	      }
-	      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-90.0F));
-	      matrixStackIn.translate(-0.5D, -0.5D, 0.5D);
-	      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
-	      renderFlash(BlockInit.C4_BLOCK.get().getDefaultState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getFuse() / 5 % 2 == 0);
-	      matrixStackIn.pop();
-	      super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-	   }
-	   
-	   public static void renderFlash(BlockState blockStateIn, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, int combinedLight, boolean doFullBright) 
-	   {
-		      int i;
-		      if (doFullBright) 
-		      {
-		         i = OverlayTexture.getPackedUV(OverlayTexture.getU(2.0F), 20);
-		      } else {
-		         i = OverlayTexture.NO_OVERLAY;
-		      }
-
-		      Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(blockStateIn, matrixStackIn, renderTypeBuffer, combinedLight, i);
-		   }
-	   
-	   public static class RenderFactory implements IRenderFactory<PrimedC4>
-	   {
-			@Override
-			public EntityRenderer<? super PrimedC4> createRenderFor(EntityRendererManager manager)
-			{
-				return new C4EntityRender(manager);
-			}
-	   }
-	   
-	   @Nullable
-	   @Override
-	   public ResourceLocation getEntityTexture(PrimedC4 entity) 
-	   {
-		  //LOGGER.info("C4 Entity Model fetched ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	      return PRIMED_C4_MODEL;
-	   }
-
-	    //@Override
-		public EntityRenderer<? super PrimedC4> createRenderFor(EntityRendererManager manager)
+	@OnlyIn(Dist.CLIENT)
+	public void render(PrimedC4 entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn)
+	{
+		matrixStackIn.push();
+		matrixStackIn.translate(0.0D, 0.5D, 0.0D);
+		if((float)entityIn.getFuse() - partialTicks + 1.0F < 10.0F)
 		{
-			return new C4EntityRender(manager);
+			float f = 1.0F - ((float)entityIn.getFuse() - partialTicks + 1.0F) / 10.0F;
+			f = MathHelper.clamp(f, 0.0F, 1.0F);
+			f = f * f;
+			f = f * f;
+			float f1 = 1.0F + f * 0.3F;
+			matrixStackIn.scale(f1, f1, f1);
 		}
+		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-90.0F));
+		matrixStackIn.translate(-0.5D, -0.5D, 0.5D);
+		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
+		renderFlash(BlockInit.C4_BLOCK.get().getDefaultState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getFuse() / 5 % 2 == 0);
+		matrixStackIn.pop();
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+	}
+
+	public static void renderFlash(BlockState blockStateIn, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, int combinedLight, boolean doFullBright)
+	{
+		int i;
+		if(doFullBright)
+		{
+			i = OverlayTexture.getPackedUV(OverlayTexture.getU(2.0F), 20);
+		}
+		else
+		{
+			i = OverlayTexture.NO_OVERLAY;
+		}
+
+		// Deprecated, but I have no alternative right now. It works, not touching it until I have to.
+		Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(blockStateIn, matrixStackIn, renderTypeBuffer, combinedLight, i);
+	}
+
+	public static class RenderFactory implements IRenderFactory<PrimedC4>
+	{
+		@Override
+		public EntityRenderer<? super PrimedC4> createRenderFor(EntityRendererManager manager)
+		{ return new C4EntityRender(manager); }
+	}
+
+	@Nullable
+	@Override
+	public ResourceLocation getEntityTexture(PrimedC4 entity)
+	{
+		// LOGGER.info("C4 Entity Model fetched~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		return PRIMED_C4_MODEL;
+	}
+
+	public EntityRenderer<? super PrimedC4> createRenderFor(EntityRendererManager manager)
+	{ return new C4EntityRender(manager); }
 }

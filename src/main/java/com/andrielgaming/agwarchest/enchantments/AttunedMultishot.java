@@ -31,42 +31,30 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class AttunedMultishot extends Enchantment
 {
 	private static final Random rand = new Random();
-	
-	public AttunedMultishot(Enchantment.Rarity p_i50017_1_, EquipmentSlotType... p_i50017_2_)
-	{
-		super(p_i50017_1_, EnchantmentType.CROSSBOW, p_i50017_2_);
-	}
-	
+
+	public AttunedMultishot(Enchantment.Rarity p_i50017_1_, EquipmentSlotType...p_i50017_2_)
+	{ super(p_i50017_1_, EnchantmentType.CROSSBOW, p_i50017_2_); }
+
 	@Override
 	public int getMaxLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	public int getMinLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	protected boolean canApplyTogether(Enchantment ench)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public int getMinEnchantability(int enchantmentLevel)
-	{
-		return 0;
-	}
-	
+	{ return 0; }
+
 	@Override
 	public String getName()
-	{
-		return this.getDefaultTranslationKey();
-	}
-	
+	{ return this.getDefaultTranslationKey(); }
+
 	@Override
 	public ITextComponent getDisplayName(int level)
 	{
@@ -74,31 +62,23 @@ public class AttunedMultishot extends Enchantment
 		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 		return iformattabletextcomponent;
 	}
-	
+
 	@Override
 	public boolean isTreasureEnchantment()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApply(ItemStack stack)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public boolean isAllowedOnBooks()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	// Tries to grab when player uses the crossbow via RightClickItem event rather
 	// than ArrowLoose or nock
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
@@ -112,18 +92,15 @@ public class AttunedMultishot extends Enchantment
 			PlayerEntity player = event.getPlayer();
 			World world = player.world;
 			ItemStack bow = event.getItemStack();
-			
-			if (bow.getItem() == Items.CROSSBOW && bow.isEnchanted()
-					&& EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MULTISHOT.get(), bow) > 0)
+
+			if(bow.getItem() == Items.CROSSBOW && bow.isEnchanted() && EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MULTISHOT.get(), bow) > 0)
 			{
-				CrossbowItem temp = (CrossbowItem) bow.getItem();
-				if (!temp.isCharged(bow))
-				{
-					chargeShots(bow, 3);
-				}
+				CrossbowItem temp = (CrossbowItem)bow.getItem();
+				if(!temp.isCharged(bow))
+				{ chargeShots(bow, 3); }
 				// public static void fireProjectiles(World worldIn, LivingEntity shooter, Hand
 				// handIn, ItemStack stack, float velocityIn, float inaccuracyIn) {
-				if (temp.isCharged(bow) && temp.canContinueUsing(bow, event.getItemStack()))
+				if(temp.isCharged(bow) && temp.canContinueUsing(bow, event.getItemStack()))
 				{
 					temp.fireProjectiles(world, player, player.getActiveHand(), bow, 1.6F, 0.75F);
 					chargeShots(bow, 3);
@@ -134,18 +111,19 @@ public class AttunedMultishot extends Enchantment
 				}
 			}
 		}
-		
+
 		public static void chargeShots(ItemStack bow, int cnt)
 		{
 			CompoundNBT compoundnbt1;
 			ListNBT listnbt;
-			for (int i = 0; i < cnt; i++)
+			for(int i = 0; i < cnt; i++)
 			{
 				CompoundNBT compoundnbt = bow.getOrCreateTag();
-				if (compoundnbt.contains("ChargedProjectiles", 9))
+				if(compoundnbt.contains("ChargedProjectiles", 9))
 				{
 					listnbt = compoundnbt.getList("ChargedProjectiles", 10);
-				} else
+				}
+				else
 				{
 					listnbt = new ListNBT();
 				}
@@ -156,7 +134,7 @@ public class AttunedMultishot extends Enchantment
 			}
 		}
 	}
-	
+
 }
 
 //SilkTouchEnchantment

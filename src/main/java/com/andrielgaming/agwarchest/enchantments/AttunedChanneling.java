@@ -12,40 +12,28 @@ import net.minecraft.util.text.TranslationTextComponent;
 public class AttunedChanneling extends Enchantment
 {
 	public AttunedChanneling(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots)
-	{
-		super(rarityIn, EnchantmentType.BREAKABLE, slots);
-	}
-	
+	{ super(rarityIn, EnchantmentType.BREAKABLE, slots); }
+
 	@Override
 	public int getMaxLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	public int getMinLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	protected boolean canApplyTogether(Enchantment ench)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public int getMinEnchantability(int enchantmentLevel)
-	{
-		return 0;
-	}
-	
+	{ return 0; }
+
 	@Override
 	public String getName()
-	{
-		return "Enhanced Channeling";
-	}
-	
+	{ return "Enhanced Channeling"; }
+
 	@Override
 	public ITextComponent getDisplayName(int level)
 	{
@@ -53,28 +41,20 @@ public class AttunedChanneling extends Enchantment
 		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 		return iformattabletextcomponent;
 	}
-	
+
 	@Override
 	public boolean isTreasureEnchantment()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApply(ItemStack stack)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public boolean isAllowedOnBooks()
-	{
-		return false;
-	}
+	{ return false; }
 }

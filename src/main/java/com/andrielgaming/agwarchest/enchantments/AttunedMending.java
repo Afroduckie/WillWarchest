@@ -24,41 +24,29 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 public class AttunedMending extends Enchantment
 {
-	public AttunedMending(Enchantment.Rarity rarityIn, EquipmentSlotType... slots)
-	{
-		super(rarityIn, EnchantmentType.BREAKABLE, slots);
-	}
-	
+	public AttunedMending(Enchantment.Rarity rarityIn, EquipmentSlotType...slots)
+	{ super(rarityIn, EnchantmentType.BREAKABLE, slots); }
+
 	@Override
 	public int getMaxLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	public int getMinLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	protected boolean canApplyTogether(Enchantment ench)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public int getMinEnchantability(int enchantmentLevel)
-	{
-		return 0;
-	}
-	
+	{ return 0; }
+
 	@Override
 	public String getName()
-	{
-		return "Enhanced Mending";
-	}
-	
+	{ return "Enhanced Mending"; }
+
 	@Override
 	public ITextComponent getDisplayName(int level)
 	{
@@ -66,31 +54,23 @@ public class AttunedMending extends Enchantment
 		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 		return iformattabletextcomponent;
 	}
-	
+
 	@Override
 	public boolean isTreasureEnchantment()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApply(ItemStack stack)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public boolean isAllowedOnBooks()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
 	public static class AttunedMendingEquipped
 	{
@@ -98,33 +78,24 @@ public class AttunedMending extends Enchantment
 		public static void doStuff(PickupXp event)
 		{
 			PlayerEntity player = event.getPlayer();
-			
+
 			// Armor first
 			Iterable<ItemStack> it = player.getArmorInventoryList();
-			for (ItemStack i : it)
+			for(ItemStack i : it)
 			{
-				if (i.isEnchanted() && (EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MENDING.get(), i) > 0)
-						|| EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, i) > 0)
-				{
-					i.setDamage(i.getDamage() - 2);
-				}
+				if(i.isEnchanted() && (EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MENDING.get(), i) > 0) || EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, i) > 0)
+				{ i.setDamage(i.getDamage() - 2); }
 			}
-			
+
 			// Check mainhand
 			ItemStack t = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-			if (t.isEnchanted() && (EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MENDING.get(), t) > 0)
-					|| EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, t) > 0)
-			{
-				t.setDamage(t.getDamage() - 2);
-			}
-			
+			if(t.isEnchanted() && (EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MENDING.get(), t) > 0) || EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, t) > 0)
+			{ t.setDamage(t.getDamage() - 2); }
+
 			// Check offhand
 			t = player.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
-			if (t.isEnchanted() && (EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MENDING.get(), t) > 0)
-					|| EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, t) > 0)
-			{
-				t.setDamage(t.getDamage() - 2);
-			}
+			if(t.isEnchanted() && (EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED_MENDING.get(), t) > 0) || EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, t) > 0)
+			{ t.setDamage(t.getDamage() - 2); }
 		}
 	}
 }

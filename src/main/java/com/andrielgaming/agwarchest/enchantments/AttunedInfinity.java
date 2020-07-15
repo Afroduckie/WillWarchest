@@ -23,40 +23,28 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class AttunedInfinity extends Enchantment
 {
 	public AttunedInfinity(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots)
-	{
-		super(rarityIn, EnchantmentType.BREAKABLE, slots);
-	}
-	
+	{ super(rarityIn, EnchantmentType.BREAKABLE, slots); }
+
 	@Override
 	public int getMaxLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	public int getMinLevel()
-	{
-		return 1;
-	}
-	
+	{ return 1; }
+
 	@Override
 	protected boolean canApplyTogether(Enchantment ench)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public int getMinEnchantability(int enchantmentLevel)
-	{
-		return 0;
-	}
-	
+	{ return 0; }
+
 	@Override
 	public String getName()
-	{
-		return "Enhanced Infinity";
-	}
-	
+	{ return "Enhanced Infinity"; }
+
 	@Override
 	public ITextComponent getDisplayName(int level)
 	{
@@ -64,31 +52,23 @@ public class AttunedInfinity extends Enchantment
 		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 		return iformattabletextcomponent;
 	}
-	
+
 	@Override
 	public boolean isTreasureEnchantment()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Override
 	public boolean canApply(ItemStack stack)
-	{
-		return true;
-	}
-	
+	{ return true; }
+
 	@Override
 	public boolean isAllowedOnBooks()
-	{
-		return false;
-	}
-	
+	{ return false; }
+
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
 	public static class AttunedInfinityEquipped
 	{
@@ -97,13 +77,11 @@ public class AttunedInfinity extends Enchantment
 		{
 			PlayerEntity player = event.player;
 			World world = player.world;
-			if (player.hasItemInSlot(EquipmentSlotType.MAINHAND)
-					&& EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(),
-							player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
+			if(player.hasItemInSlot(EquipmentSlotType.MAINHAND) && EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(), player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
 			{
 				// This is where I add enchantment stuff if I ever want Attuned to do something
 				// TODO
-				
+
 			}
 		}
 	}
