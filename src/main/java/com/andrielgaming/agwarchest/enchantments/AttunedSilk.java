@@ -15,66 +15,66 @@ public class AttunedSilk extends Enchantment
 	{
 		super(rarityIn, EnchantmentType.BREAKABLE, slots);
 	}
-
+	
 	@Override
-	public int getMaxLevel() 
+	public int getMaxLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	public int getMinLevel() 
+	public int getMinLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	protected boolean canApplyTogether(Enchantment ench) 
+	protected boolean canApplyTogether(Enchantment ench)
 	{
 		return true;
 	}
-
+	
 	@Override
-	public int getMinEnchantability(int enchantmentLevel) 
+	public int getMinEnchantability(int enchantmentLevel)
 	{
-	    return 0;
+		return 0;
 	}
 	
 	@Override
-	public String getName() 
+	public String getName()
 	{
-	    return this.getDefaultTranslationKey();
-	}
-
-	@Override
-	public ITextComponent getDisplayName(int level) 
-	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Silk Touch II");
-	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
-	      return iformattabletextcomponent;
+		return this.getDefaultTranslationKey();
 	}
 	
 	@Override
-	public boolean isTreasureEnchantment() 
+	public ITextComponent getDisplayName(int level)
 	{
-	    return false;
+		IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Silk Touch II");
+		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
+		return iformattabletextcomponent;
 	}
 	
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) 
+	public boolean isTreasureEnchantment()
 	{
-	    return false;
+		return false;
 	}
 	
 	@Override
-	public boolean canApply(ItemStack stack) 
+	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-	    return true;
+		return false;
 	}
 	
 	@Override
-	public boolean isAllowedOnBooks() 
+	public boolean canApply(ItemStack stack)
 	{
-	      return false;
+		return true;
+	}
+	
+	@Override
+	public boolean isAllowedOnBooks()
+	{
+		return false;
 	}
 }

@@ -22,84 +22,87 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 public class AttunedInfinity extends Enchantment
 {
-	public AttunedInfinity(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) 
+	public AttunedInfinity(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots)
 	{
 		super(rarityIn, EnchantmentType.BREAKABLE, slots);
 	}
-
+	
 	@Override
-	public int getMaxLevel() 
+	public int getMaxLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	public int getMinLevel() 
+	public int getMinLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	protected boolean canApplyTogether(Enchantment ench) 
+	protected boolean canApplyTogether(Enchantment ench)
 	{
 		return true;
 	}
-
+	
 	@Override
-	public int getMinEnchantability(int enchantmentLevel) 
+	public int getMinEnchantability(int enchantmentLevel)
 	{
-	    return 0;
+		return 0;
 	}
 	
 	@Override
-	public String getName() 
+	public String getName()
 	{
-	    return "Enhanced Infinity";
-	}
-
-	@Override
-	public ITextComponent getDisplayName(int level) 
-	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Infinity II");
-	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
-	      return iformattabletextcomponent;
+		return "Enhanced Infinity";
 	}
 	
 	@Override
-	public boolean isTreasureEnchantment() 
+	public ITextComponent getDisplayName(int level)
 	{
-	    return false;
+		IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Infinity II");
+		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
+		return iformattabletextcomponent;
 	}
 	
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) 
+	public boolean isTreasureEnchantment()
 	{
-	    return false;
+		return false;
 	}
 	
 	@Override
-	public boolean canApply(ItemStack stack) 
+	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-	    return true;
+		return false;
 	}
 	
 	@Override
-	public boolean isAllowedOnBooks() 
+	public boolean canApply(ItemStack stack)
 	{
-	      return false;
+		return true;
+	}
+	
+	@Override
+	public boolean isAllowedOnBooks()
+	{
+		return false;
 	}
 	
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
 	public static class AttunedInfinityEquipped
 	{
 		@SubscribeEvent
-		public static void doStuff(PlayerTickEvent event) 
+		public static void doStuff(PlayerTickEvent event)
 		{
 			PlayerEntity player = event.player;
 			World world = player.world;
-			if(player.hasItemInSlot(EquipmentSlotType.MAINHAND) && EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(),	player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
+			if (player.hasItemInSlot(EquipmentSlotType.MAINHAND)
+					&& EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(),
+							player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
 			{
-				//This is where I add enchantment stuff if I ever want Attuned to do something TODO
+				// This is where I add enchantment stuff if I ever want Attuned to do something
+				// TODO
 				
 			}
 		}

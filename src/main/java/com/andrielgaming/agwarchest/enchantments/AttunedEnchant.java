@@ -21,86 +21,93 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 public class AttunedEnchant extends Enchantment
 {
-	public AttunedEnchant(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) 
+	public AttunedEnchant(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots)
 	{
 		super(rarityIn, EnchantmentType.BREAKABLE, slots);
 	}
-
+	
 	@Override
-	public int getMaxLevel() 
+	public int getMaxLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	public int getMinLevel() 
+	public int getMinLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	protected boolean canApplyTogether(Enchantment ench) 
+	protected boolean canApplyTogether(Enchantment ench)
 	{
 		return true;
 	}
-
+	
 	@Override
-	public int getMinEnchantability(int enchantmentLevel) 
+	public int getMinEnchantability(int enchantmentLevel)
 	{
-	    return 0;
+		return 0;
 	}
 	
+	
+	//This function is only here so I can copy-paste it into new enchants
+	/*
 	@Mod.EventBusSubscriber(modid = WarchestMaster.MOD_ID, bus = Bus.FORGE)
-	public static class Attuned 
+	public static class Attuned
 	{
 		@SubscribeEvent
-		public static void doStuff(PlayerTickEvent event) 
+		public static void doStuff(PlayerTickEvent event)
 		{
 			PlayerEntity player = event.player;
 			World world = player.world;
-			if(player.hasItemInSlot(EquipmentSlotType.MAINHAND) && EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(),	player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
+			if (player.hasItemInSlot(EquipmentSlotType.MAINHAND)
+					&& EnchantmentHelper.getEnchantmentLevel(EnchantInit.ATTUNED.get(),
+							player.getItemStackFromSlot(EquipmentSlotType.MAINHAND)) > 0)
 			{
-				//This is where I add enchantment stuff if I ever want Attuned to do something TODO
+				// This is where I add enchantment stuff if I ever want Attuned to do something
+				// TODO
 				
 			}
 		}
 	}
+	*/
 	
 	@Override
-	public String getName() 
+	public String getName()
 	{
-	    return "May this artifact bless your travels...";
-	}
-
-	@Override
-	public ITextComponent getDisplayName(int level) 
-	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Totem Attuned");
-	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_BLUE);
-	      return iformattabletextcomponent;
+		return "May this artifact bless your travels...";
 	}
 	
 	@Override
-	public boolean isTreasureEnchantment() 
+	public ITextComponent getDisplayName(int level)
 	{
-	    return false;
+		IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Totem Attuned");
+		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_BLUE);
+		return iformattabletextcomponent;
 	}
 	
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) 
+	public boolean isTreasureEnchantment()
 	{
-	    return false;
+		return false;
 	}
 	
 	@Override
-	public boolean canApply(ItemStack stack) 
+	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-	    return true;
+		return false;
 	}
 	
 	@Override
-	public boolean isAllowedOnBooks() 
+	public boolean canApply(ItemStack stack)
 	{
-	      return false;
+		return true;
+	}
+	
+	@Override
+	public boolean isAllowedOnBooks()
+	{
+		return false;
 	}
 }

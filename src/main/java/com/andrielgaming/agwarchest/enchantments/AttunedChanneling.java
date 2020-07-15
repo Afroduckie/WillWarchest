@@ -11,70 +11,70 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class AttunedChanneling extends Enchantment
 {
-	public AttunedChanneling(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) 
+	public AttunedChanneling(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots)
 	{
 		super(rarityIn, EnchantmentType.BREAKABLE, slots);
 	}
 	
 	@Override
-	public int getMaxLevel() 
+	public int getMaxLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	public int getMinLevel() 
+	public int getMinLevel()
 	{
 		return 1;
 	}
-
+	
 	@Override
-	protected boolean canApplyTogether(Enchantment ench) 
+	protected boolean canApplyTogether(Enchantment ench)
 	{
 		return true;
 	}
-
+	
 	@Override
-	public int getMinEnchantability(int enchantmentLevel) 
+	public int getMinEnchantability(int enchantmentLevel)
 	{
-	    return 0;
+		return 0;
 	}
 	
 	@Override
-	public String getName() 
+	public String getName()
 	{
-	    return "Enhanced Channeling";
-	}
-
-	@Override
-	public ITextComponent getDisplayName(int level) 
-	{
-	      IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Channeling II");
-	      iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
-	      return iformattabletextcomponent;
+		return "Enhanced Channeling";
 	}
 	
 	@Override
-	public boolean isTreasureEnchantment() 
+	public ITextComponent getDisplayName(int level)
 	{
-	    return false;
+		IFormattableTextComponent iformattabletextcomponent = new TranslationTextComponent("Channeling II");
+		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
+		return iformattabletextcomponent;
 	}
 	
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack) 
+	public boolean isTreasureEnchantment()
 	{
-	    return false;
+		return false;
 	}
 	
 	@Override
-	public boolean canApply(ItemStack stack) 
+	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-	    return true;
+		return false;
 	}
 	
 	@Override
-	public boolean isAllowedOnBooks() 
+	public boolean canApply(ItemStack stack)
 	{
-	      return false;
+		return true;
+	}
+	
+	@Override
+	public boolean isAllowedOnBooks()
+	{
+		return false;
 	}
 }
