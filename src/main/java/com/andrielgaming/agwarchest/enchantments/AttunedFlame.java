@@ -57,7 +57,7 @@ public class AttunedFlame extends Enchantment
 		iformattabletextcomponent.func_240699_a_(TextFormatting.DARK_PURPLE);
 		return iformattabletextcomponent;
 	}
-
+	//AbstractFireBlock
 	@Override
 	public boolean isTreasureEnchantment()
 	{ return false; }
@@ -95,7 +95,7 @@ public class AttunedFlame extends Enchantment
 					World world = hurt.world;
 					//world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 					
-					hurt.func_241209_g_(99);
+					hurt.func_241209_g_(120);
 				}
 			}
 		}
