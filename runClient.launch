@@ -2,11 +2,11 @@
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
     <mapAttribute key="org.eclipse.debug.core.environmentVariables">
         <mapEntry key="FORGE_GROUP" value="net.minecraftforge"/>
-        <mapEntry key="FORGE_VERSION" value="32.0.66"/>
+        <mapEntry key="FORGE_VERSION" value="32.0.67"/>
         <mapEntry key="MCP_MAPPINGS" value="snapshot_20200514-1.16"/>
         <mapEntry key="MCP_VERSION" value="20200625.160719"/>
         <mapEntry key="MC_VERSION" value="1.16.1"/>
-        <mapEntry key="MOD_CLASSES" value="WillWarchest%%E:\ForgeSRC16\WillWarchest\bin\main;WillWarchest%%E:\ForgeSRC16\WillWarchest\bin\main"/>
+        <mapEntry key="MOD_CLASSES" value="agwarchest%%E:\ForgeSRC16\WillWarchest\bin\main;agwarchest%%E:\ForgeSRC16\WillWarchest\bin\main"/>
         <mapEntry key="assetDirectory" value="C:\Users\andre\.gradle\caches\forge_gradle\assets"/>
         <mapEntry key="assetIndex" value="1.16"/>
         <mapEntry key="nativesDirectory" value="E:\ForgeSRC16\WillWarchest\build\natives"/>
