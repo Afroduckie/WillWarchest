@@ -2,12 +2,14 @@ package com.andrielgaming.agwarchest.enchantments;
 
 import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.init.EnchantInit;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +18,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -77,8 +81,8 @@ public class AttunedFlame extends Enchantment
 		private static PlayerEntity player;
 		private static ItemStack bow;
 
-		// Ideally Flame II will set the enemy on fire with soul fire instead of regular fire
-		// Might need to implement a new packet to render the soul fire TODO
+		// Ideally Flame II will set the enemy on fire with soul fire instead of regular
+		// fire
 		@SubscribeEvent
 		public static void doStuff(LivingHurtEvent event)
 		{
@@ -91,8 +95,8 @@ public class AttunedFlame extends Enchantment
 					LivingEntity hurt = (LivingEntity)event.getEntity();
 					BlockPos pos = new BlockPos(hurt.getPosX(), hurt.getPosY(), hurt.getPosZ());
 					World world = hurt.world;
-					//world.setBlockState(pos, Blocks.field_235335_bO_.getDefaultState());
-					hurt.func_241209_g_(99);
+					world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+
 				}
 			}
 		}
