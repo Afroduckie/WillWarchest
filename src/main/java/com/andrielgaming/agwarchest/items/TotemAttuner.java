@@ -34,8 +34,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-//TODO Animation rendering, refer to lines 635, 642 in GameRenderer
-
 public class TotemAttuner extends Item implements IVanishable
 {
 	private Map<Enchantment, Integer> enchants;
@@ -60,8 +58,7 @@ public class TotemAttuner extends Item implements IVanishable
 
 	/*
 	 * Innate right click functionality for Totem of Attunement held item.
-	 * ------------------------------- 
-	 * Checks the tool, weapon, or armor item held
+	 * ------------------------------- Checks the tool, weapon, or armor item held
 	 * in the offhand for valid enchantments. If it has not already been "attuned",
 	 * it will "attune" the gear item by doubling its enchantment strength, or in
 	 * cases of enchants that can't simply be doubled, replace them with new
@@ -75,7 +72,8 @@ public class TotemAttuner extends Item implements IVanishable
 		ItemStack tool = playerIn.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
 		Item it = tool.getItem();
 
-		// Check if the enchantment map contains an AttunedEnchant. It it does, the item can't be attuned
+		// Check if the enchantment map contains an AttunedEnchant. It it does, the item
+		// can't be attuned
 		// Checks this first so totem won't break prematurely
 		if(EnchantmentHelper.getEnchantments(tool).containsKey(EnchantInit.ATTUNED.get())) return ActionResult.resultFail(playerIn.getHeldItem(handIn));
 
