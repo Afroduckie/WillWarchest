@@ -1,23 +1,28 @@
 package com.andrielgaming.agwarchest.util.render;
 
 import java.util.Random;
+
+import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.entities.mobs.Enderbit;
 import com.andrielgaming.agwarchest.util.models.EnderbitEyesLayer;
 import com.andrielgaming.agwarchest.util.models.EnderbitModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
 public class EnderbitRender extends MobRenderer<Enderbit, EnderbitModel<Enderbit>>
 {
-	private static final ResourceLocation ENDERBIT_TEXTURES = new ResourceLocation("textures/entities/enderbit/enderbit.png");
+	private static final ResourceLocation ENDERBIT_TEXTURES = new ResourceLocation(WarchestMaster.MOD_ID, "textures/entities/enderbit/enderbit.png");
 	private final Random rnd = new Random();
 
 	public EnderbitRender(EntityRendererManager renderManagerIn)
@@ -49,9 +54,13 @@ public class EnderbitRender extends MobRenderer<Enderbit, EnderbitModel<Enderbit
 		}
 	}
 
-	/**
-	 * Returns the location of an entity's texture.
-	 */
+	public static class RenderFactory implements IRenderFactory<Enderbit>
+	{
+		@Override
+		public EntityRenderer<? super Enderbit> createRenderFor(EntityRendererManager manager)
+		{ return new EnderbitRender(manager); }
+	}
+
 	public ResourceLocation getEntityTexture(Enderbit entity)
 	{ return ENDERBIT_TEXTURES; }
 }
