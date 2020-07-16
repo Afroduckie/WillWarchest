@@ -2,7 +2,9 @@ package com.andrielgaming.agwarchest.init;
 
 import com.andrielgaming.agwarchest.WarchestMaster;
 import com.andrielgaming.agwarchest.entities.misc.PrimedC4;
+import com.andrielgaming.agwarchest.entities.mobs.Enderbit;
 import com.andrielgaming.agwarchest.entities.mobs.MoltenCreeperEntity;
+
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -27,11 +29,13 @@ public final class ModEntityTypes
 	public static EntityType<MoltenCreeperEntity> MCREEPER = null;
 	public static final RegistryObject<EntityType<PrimedC4>> C4_DUMMY_ENTITY = ENTITY_TYPES.register("c4_dummy_entity", () -> EntityType.Builder.<PrimedC4>create(PrimedC4::new, EntityClassification.MISC).size(0.98f, 0.98f).build(new ResourceLocation(WarchestMaster.MOD_ID, "c4_dummy_entity").toString()));
 	public static final RegistryObject<EntityType<MoltenCreeperEntity>> MOLTEN_CREEPER = ENTITY_TYPES.register("molten_creeper", () -> EntityType.Builder.<MoltenCreeperEntity>create(MoltenCreeperEntity::new, EntityClassification.MONSTER).immuneToFire().size(EntityType.CREEPER.getWidth(), EntityType.CREEPER.getHeight()).build(new ResourceLocation(WarchestMaster.MOD_ID, "molten_creeper").toString()));
+	public static final RegistryObject<EntityType<Enderbit>> ENDERBIT = ENTITY_TYPES.register("enderbit", () -> EntityType.Builder.<Enderbit>create(Enderbit::new, EntityClassification.MONSTER).size(EntityType.ENDERMAN.getWidth(), EntityType.ENDERMAN.getHeight()).build(new ResourceLocation(WarchestMaster.MOD_ID, "enderbit").toString()));
 
 	// put(EntityType.CREEPER, CreeperEntity.func_234278_m_().func_233813_a_())
 	public static final void registerMobAttributes()
 	{
 		GlobalEntityTypeAttributes.put(ModEntityTypes.MOLTEN_CREEPER.get(), MoltenCreeperEntity.func_234278_m_().func_233813_a_());
+		GlobalEntityTypeAttributes.put(ModEntityTypes.ENDERBIT.get(), Enderbit.func_234287_m_().func_233813_a_());
 	}
 
 	public static final void registerEntityWorldSpawn(EntityType<?> entity, Biome...biomes)
