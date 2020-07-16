@@ -1,5 +1,5 @@
 # William's Warchest
-## Current Version is for Forge 32.0.47 for Minecraft Update 1.16.1
+## Current Version is for Forge 32.0.67 for Minecraft Update 1.16.1
 
 If you have any issues to submit, please read the FAQ first and post an issue if the FAQ does not pertain to you!
 
