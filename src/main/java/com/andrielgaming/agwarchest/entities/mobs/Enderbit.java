@@ -226,14 +226,10 @@ public class Enderbit extends MonsterEntity implements IAngerable
 		return false;
 	}
 
+	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
-	{ return 2.55F; }
+	{ return 0.85F; }
 
-	/**
-	 * Called frequently so the entity can update its state every tick as required.
-	 * For example, zombies and skeletons use this to react to sunlight and start to
-	 * burn.
-	 */
 	public void livingTick()
 	{
 		if(this.world.isRemote)

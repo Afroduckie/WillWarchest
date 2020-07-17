@@ -1,15 +1,17 @@
 package com.andrielgaming.agwarchest;
 
-import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.andrielgaming.agwarchest.init.BlockInit;
 import com.andrielgaming.agwarchest.init.EnchantInit;
 import com.andrielgaming.agwarchest.init.ItemInit;
 import com.andrielgaming.agwarchest.init.ModEntityTypes;
 import com.andrielgaming.agwarchest.network.AGWarchestPacketHandler;
 import com.andrielgaming.agwarchest.util.render.C4EntityRender;
+import com.andrielgaming.agwarchest.util.render.EnderbitRender;
 import com.andrielgaming.agwarchest.util.render.MCRenderer;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -90,6 +92,7 @@ public class WarchestMaster
 		ModEntityTypes.registerEntitySpawnPlacements();
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.C4_DUMMY_ENTITY.get(), new C4EntityRender.RenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MOLTEN_CREEPER.get(), new MCRenderer.RenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ENDERBIT.get(), new EnderbitRender.RenderFactory());
 	}
 
 	// Primarily for inter-mod communique, none right now
